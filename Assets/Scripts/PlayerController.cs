@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour {
 	//collectibles
 	public int coins = 0;
 
+
 	void Start () {
 		this.rb2d = GetComponent<Rigidbody2D>();
 		this.transform.position = new Vector3(respawnPoint.transform.position.x,
