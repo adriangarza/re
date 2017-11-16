@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour {
 
 	public int deaths = 0;
 
+	public GameObject graveyard;
+
 	void Start () {
 		this.rb2d = GetComponent<Rigidbody2D>();
 		this.transform.position = new Vector3(respawnPoint.transform.position.x,
@@ -41,8 +43,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Move() {
-		float h = Input.GetAxis("Horizontal");
-
 		if (HorizontalInput() && !frozen) {
 			if (Input.GetKey(KeyCode.RightArrow))
             {
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 	void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "platform") {
+		if (other.gameObject.tag == "platform" || other.gameObject.tag == "corpse") {
 			this.grounded = true;
 			
 			//stop the !grounded timeout on landing
@@ -107,8 +107,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		//on hitting a checkpoint
 		else if (other.gameObject.tag == "Respawn") {
-			this.respawnPoint = other.gameObject;
-			other.GetComponent<Animator>().SetTrigger("activate");
+			HitCheckpoint(other.gameObject);
 		}
 	}
 
@@ -146,10 +145,34 @@ public class PlayerController : MonoBehaviour {
 		rb2d.rotation = 0;	
 
 		//create a corpse in the same spot, and add the last attributes
-		corpse = Instantiate(corpse, lastPos, Quaternion.identity);
-		Rigidbody2D cRB = corpse.GetComponent<Rigidbody2D>();
+		Transform newcorpse = Instantiate(corpse, lastPos, Quaternion.identity);
+		Rigidbody2D cRB = newcorpse.GetComponent<Rigidbody2D>();
 		cRB.velocity = lastV;
 		cRB.rotation = lastR;
 		cRB.angularVelocity = lastAngV;
+
+		//then put the corpse in the container for possible removal later on
+		newcorpse.transform.parent = graveyard.transform;
+	}
+
+	void RemoveCorpses() {
+		foreach (Transform corpse in graveyard.transform) {
+			Destroy(corpse.gameObject);
+		}
+	}
+
+	void HitCheckpoint(GameObject cp) {
+		this.respawnPoint = cp;
+		Animator cpAnim = cp.GetComponent<Animator>();
+
+		//only play the animation and remove corpses if the checkpoint hasn't been hit yet
+		if (!cpAnim.GetBool("active")) {
+			cpAnim.SetBool("active", true);
+			RemoveCorpses();
+		}
+	}
+
+	void HitJump(GameObject jp) {
+		rb2d.velocity = jp.GetComponent<JumpController>().launchVelocity;
 	}
 }

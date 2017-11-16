@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50484240395498670}
   m_Layer: 0
   m_Name: corpse
-  m_TagString: platform
+  m_TagString: corpse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
