@@ -105,6 +105,11 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.tag == "shock") {
 			Die();
 		}
+		//on hitting a checkpoint
+		else if (other.gameObject.tag == "Respawn") {
+			this.respawnPoint = other.gameObject;
+			other.GetComponent<Animator>().SetTrigger("activate");
+		}
 	}
 
 	//wait a moment and THEN count as leaving the ground, since this thing is never touching the ground for long
