@@ -26,8 +26,13 @@ public class PlayerController : MonoBehaviour {
 	public GameObject respawnPoint;
 	public Transform corpse;
 
+	public int deaths = 0;
+
 	void Start () {
 		this.rb2d = GetComponent<Rigidbody2D>();
+		this.transform.position = new Vector3(respawnPoint.transform.position.x,
+										respawnPoint.transform.position.y,
+										this.transform.position.z);
 	}
 	
 	void Update () {
@@ -51,6 +56,7 @@ public class PlayerController : MonoBehaviour {
             }
 		}
 
+		//clamp speed, angular velocity, etc
 		float speedX = this.rb2d.velocity.x;
 		float speedY = this.rb2d.velocity.y;
 		float angV = this.rb2d.angularVelocity;
@@ -95,7 +101,13 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	//wait .1s and then count as leaving the ground, since this thing is never touching the ground for long
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.tag == "shock") {
+			Die();
+		}
+	}
+
+	//wait a moment and THEN count as leaving the ground, since this thing is never touching the ground for long
 	void OnCollisionExit2D(Collision2D other) {
 		if (other.gameObject.tag == "platform") {
 			groundCoroutine = LeaveGround();
@@ -111,19 +123,22 @@ public class PlayerController : MonoBehaviour {
 
 
 	public void Die() {
+		//ow oof ouch, bone hurting environment hazards
+		deaths++;
+
 		//store the current rotation and position
 		Vector3 lastPos = rb2d.transform.position;
 		Vector2 lastV = rb2d.velocity;
 		float lastR = rb2d.rotation;
 		float lastAngV = rb2d.angularVelocity;
 
-		//move back to the respawn point
+		//move back to the respawn point, reset movement
 		this.transform.position = new Vector3(respawnPoint.transform.position.x,
 												respawnPoint.transform.position.y,
 												this.transform.position.z);
-		
 		rb2d.angularVelocity = 0;
-		rb2d.velocity = new Vector2(0, 0);	
+		rb2d.velocity = new Vector2(0, 0);
+		rb2d.rotation = 0;	
 
 		//create a corpse in the same spot, and add the last attributes
 		corpse = Instantiate(corpse, lastPos, Quaternion.identity);
