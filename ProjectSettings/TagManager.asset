@@ -9,6 +9,7 @@ TagManager:
   - shock
   - jump
   - corpse
+  - coin
   layers:
   - Default
   - TransparentFX

@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour {
 
 	public GameObject graveyard;
 
+	//collectibles
+	public int coins = 0;
+
 	void Start () {
 		this.rb2d = GetComponent<Rigidbody2D>();
 		this.transform.position = new Vector3(respawnPoint.transform.position.x,
@@ -109,6 +112,9 @@ public class PlayerController : MonoBehaviour {
 		else if (other.gameObject.tag == "Respawn") {
 			HitCheckpoint(other.gameObject);
 		}
+		else if (other.gameObject.tag == "coin") {
+			CollectCoin(other.gameObject);
+		}
 	}
 
 	//wait a moment and THEN count as leaving the ground, since this thing is never touching the ground for long
@@ -172,7 +178,8 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void HitJump(GameObject jp) {
-		rb2d.velocity = jp.GetComponent<JumpController>().launchVelocity;
+	void CollectCoin(GameObject coin) {
+		this.coins++;
+		coin.GetComponent<Animator>().SetTrigger("get");
 	}
 }
