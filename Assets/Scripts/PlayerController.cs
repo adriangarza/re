@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
 	public Transform corpse;
 
 	public int deaths = 0;
+	public int suicides = 0;
 
 	public GameObject graveyard;
 
@@ -134,7 +135,6 @@ public class PlayerController : MonoBehaviour {
 
 
 	public void Die() {
-		//ow oof ouch, bone hurting environment hazards
 		deaths++;
 
 		//store the current rotation and position
@@ -182,5 +182,10 @@ public class PlayerController : MonoBehaviour {
 	void CollectCoin(GameObject coin) {
 		this.coins++;
 		coin.GetComponent<Animator>().SetTrigger("get");
+	}
+
+	void Suicide() {
+		this.suicides++;
+		this.Die();
 	}
 }
