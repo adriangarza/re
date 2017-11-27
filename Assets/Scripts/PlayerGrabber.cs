@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerGrabber : MonoBehaviour {
 
-	void OnCollisionEnter2D(Collision2D c) {
+	void OnCollisionStay2D(Collision2D c) {
 		if (c.gameObject.tag == "Player") {
 			c.transform.parent = this.transform;
 		}
