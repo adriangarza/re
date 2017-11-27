@@ -176,16 +176,16 @@ public class PlayerController : MonoBehaviour {
 
 	void RemoveCorpses() {
 		foreach (Transform corpse in graveyard.transform) {
-			Destroy(corpse.gameObject);
+			corpse.gameObject.GetComponent<CorpseController>().Burst();
 		}
 	}
 
 	void HitCheckpoint(GameObject cp) {
-		this.respawnPoint = cp;
 		Animator cpAnim = cp.GetComponent<Animator>();
 
-		//only play the animation and remove corpses if the checkpoint hasn't been hit yet
+		//only play the animation, set respawn and remove corpses if the checkpoint hasn't been hit yet
 		if (!cpAnim.GetBool("active")) {
+			this.respawnPoint = cp;			
 			cpAnim.SetBool("active", true);
 			RemoveCorpses();
 		}
