@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212429851912603282}
   - component: {fileID: 61818204591076832}
   - component: {fileID: 50484240395498670}
+  - component: {fileID: 114467924482696784}
   m_Layer: 0
   m_Name: corpse
   m_TagString: corpse
@@ -87,6 +88,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.22222222, y: 0.22222222}
   m_EdgeRadius: 0
+--- !u!114 &114467924482696784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1806240543155780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc56ddd7bbae22f4db51c45894c64dec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212429851912603282
 SpriteRenderer:
   m_ObjectHideFlags: 1
