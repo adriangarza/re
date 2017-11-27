@@ -21,6 +21,7 @@ public class CorpseController : MonoBehaviour {
 			Transform newChunk = Instantiate(chunk, this.transform.position, Quaternion.identity);
 			Rigidbody2D cRB = newChunk.GetComponent<Rigidbody2D>();
 			cRB.velocity = new Vector2(Random.Range(-4, 4), Random.Range(4, 6));
+			cRB.angularVelocity = Random.Range(-5, 5);
 		}
 		Destroy(this.gameObject);
 	}

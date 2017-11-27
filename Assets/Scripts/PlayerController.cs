@@ -106,11 +106,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.tag == "shock") {
+		if (other.gameObject.tag == "shock" 
+			|| other.gameObject.tag == "fire") {
 			Die();
-		}
-		else if (other.gameObject.tag == "fire") {
-			DieToFire();
 		}
 		//on hitting a checkpoint
 		else if (other.gameObject.tag == "Respawn") {
@@ -158,12 +156,6 @@ public class PlayerController : MonoBehaviour {
 		newcorpse.transform.parent = graveyard.transform;
 	}
 
-	public void DieToFire() {
-		deaths++;
-		//don't spawn a corpse
-		Respawn();
-	}
-
 	public void Respawn() {
 		//move back to the respawn point, reset movement
 		this.transform.position = new Vector3(respawnPoint.transform.position.x,
@@ -182,10 +174,9 @@ public class PlayerController : MonoBehaviour {
 
 	void HitCheckpoint(GameObject cp) {
 		Animator cpAnim = cp.GetComponent<Animator>();
-
+		this.respawnPoint = cp;			
 		//only play the animation, set respawn and remove corpses if the checkpoint hasn't been hit yet
 		if (!cpAnim.GetBool("active")) {
-			this.respawnPoint = cp;			
 			cpAnim.SetBool("active", true);
 			RemoveCorpses();
 		}
