@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour {
 	private IEnumerator groundCoroutine = null;
 
 	private Rigidbody2D rb2d;
-	private BoxCollider2D bc;
 
 	public bool grounded = false;
 	public bool frozen = false;
@@ -110,6 +109,9 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.tag == "shock") {
 			Die();
 		}
+		else if (other.gameObject.tag == "fire") {
+			DieToFire();
+		}
 		//on hitting a checkpoint
 		else if (other.gameObject.tag == "Respawn") {
 			HitCheckpoint(other.gameObject);
@@ -143,13 +145,7 @@ public class PlayerController : MonoBehaviour {
 		float lastR = rb2d.rotation;
 		float lastAngV = rb2d.angularVelocity;
 
-		//move back to the respawn point, reset movement
-		this.transform.position = new Vector3(respawnPoint.transform.position.x,
-												respawnPoint.transform.position.y,
-												this.transform.position.z);
-		rb2d.angularVelocity = 0;
-		rb2d.velocity = new Vector2(0, 0);
-		rb2d.rotation = 0;	
+		Respawn();	
 
 		//create a corpse in the same spot, and add the last attributes
 		Transform newcorpse = Instantiate(corpse, lastPos, Quaternion.identity);
@@ -160,6 +156,22 @@ public class PlayerController : MonoBehaviour {
 
 		//then put the corpse in the container for possible removal later on
 		newcorpse.transform.parent = graveyard.transform;
+	}
+
+	public void DieToFire() {
+		deaths++;
+		//don't spawn a corpse
+		Respawn();
+	}
+
+	public void Respawn() {
+		//move back to the respawn point, reset movement
+		this.transform.position = new Vector3(respawnPoint.transform.position.x,
+												respawnPoint.transform.position.y,
+												this.transform.position.z);
+		rb2d.angularVelocity = 0;
+		rb2d.velocity = new Vector2(0, 0);
+		rb2d.rotation = 0;
 	}
 
 	void RemoveCorpses() {
