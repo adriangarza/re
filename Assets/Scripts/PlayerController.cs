@@ -79,6 +79,9 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.Z)) {
 			Die();
+		} 
+		if (Input.GetKeyDown(KeyCode.X)) {
+			RemoveCorpses();
 		}
 	}
 
@@ -107,7 +110,7 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "shock" 
-			|| other.gameObject.tag == "fire") {
+			|| other.gameObject.tag == "saw") {
 			Die();
 		}
 		//on hitting a checkpoint

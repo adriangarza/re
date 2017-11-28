@@ -6,6 +6,8 @@ public class SelfDestruct : MonoBehaviour {
 
 	public float timeout = 0;
 	public bool randomTimeout = false;
+	public float minBound = 2;
+	public float maxBound = 4;
 
 	void Start() {
 		if (timeout > 0) {
@@ -18,7 +20,7 @@ public class SelfDestruct : MonoBehaviour {
 	}
 
 	IEnumerator KillTimer(float seconds) {
-		seconds = randomTimeout ? Random.Range(2f, 4f) : seconds;
+		seconds = randomTimeout ? Random.Range(minBound, maxBound) : seconds;
 		yield return new WaitForSeconds(seconds);
 		Kill();
 	}

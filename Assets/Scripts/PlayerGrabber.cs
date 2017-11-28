@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//for use with moving platforms
 public class PlayerGrabber : MonoBehaviour {
 
 	void OnCollisionStay2D(Collision2D c) {

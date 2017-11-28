@@ -8,10 +8,10 @@ public class CorpseController : MonoBehaviour {
 
 	public int numChunks;
 
-	//destroy corpses on fire collision	
+	//destroy corpses on saw collision	
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.tag == "fire") {
-			Destroy(this.gameObject);
+		if (other.gameObject.tag == "saw") {
+			Burst();
 		}
 	}
 
