@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour {
 	//collectibles
 	public int coins = 0;
 
+	//set to false after getting flung off a jump pad
+	public bool speedClamped = true;
 
 	void Start () {
 		this.rb2d = GetComponent<Rigidbody2D>();
@@ -60,22 +62,7 @@ public class PlayerController : MonoBehaviour {
             }
 		}
 
-		//clamp speed, angular velocity, etc
-		float speedX = this.rb2d.velocity.x;
-		float speedY = this.rb2d.velocity.y;
-		float angV = this.rb2d.angularVelocity;
-
-		if (speedX < maxSpeedX * -1) {
-			this.rb2d.velocity = new Vector2(maxSpeedX * -1, speedY);
-		} else if (speedX > maxSpeedX) {
-			this.rb2d.velocity = new Vector2(maxSpeedX, speedY);
-		}
-
-		if (angV > maxAngularVelocity) {
-			this.rb2d.angularVelocity = maxAngularVelocity;
-		} else if (angV < maxAngularVelocity * -1) {
-			this.rb2d.angularVelocity = maxAngularVelocity * -1;
-		}
+		ClampSpeed();
 
 		if (Input.GetKeyDown(KeyCode.Z)) {
 			Die();
@@ -100,7 +87,7 @@ public class PlayerController : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag == "platform" || other.gameObject.tag == "corpse") {
 			this.grounded = true;
-			
+			this.speedClamped = true;
 			//stop the !grounded timeout on landing
 			if (groundCoroutine != null) {
 				StopCoroutine(groundCoroutine);
@@ -135,7 +122,6 @@ public class PlayerController : MonoBehaviour {
 		this.grounded = false;
 		groundCoroutine = null;
 	}
-
 
 	public void Die() {
 		deaths++;
@@ -195,5 +181,26 @@ public class PlayerController : MonoBehaviour {
 	void Suicide() {
 		this.suicides++;
 		this.Die();
+	}
+
+	void ClampSpeed() {
+		if (!speedClamped) return;
+
+		//clamp speed, angular velocity, etc
+		float speedX = this.rb2d.velocity.x;
+		float speedY = this.rb2d.velocity.y;
+		float angV = this.rb2d.angularVelocity;
+
+		if (speedX < maxSpeedX * -1) {
+			this.rb2d.velocity = new Vector2(maxSpeedX * -1, speedY);
+		} else if (speedX > maxSpeedX) {
+			this.rb2d.velocity = new Vector2(maxSpeedX, speedY);
+		}
+
+		if (angV > maxAngularVelocity) {
+			this.rb2d.angularVelocity = maxAngularVelocity;
+		} else if (angV < maxAngularVelocity * -1) {
+			this.rb2d.angularVelocity = maxAngularVelocity * -1;
+		}
 	}
 }
