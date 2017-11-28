@@ -36,9 +36,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4035613794517072}
   - component: {fileID: 212605004934190940}
+  - component: {fileID: 61518209370120228}
   m_Layer: 0
   m_Name: main
-  m_TagString: Untagged
+  m_TagString: platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,7 +68,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4853880757376580}
-  - component: {fileID: 61603286700121186}
   m_Layer: 0
   m_Name: stretchy platform
   m_TagString: platform
@@ -130,12 +130,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61603286700121186
+--- !u!61 &61518209370120228
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1927668764092284}
+  m_GameObject: {fileID: 1418386483595400}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}

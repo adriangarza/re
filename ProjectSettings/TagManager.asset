@@ -10,6 +10,7 @@ TagManager:
   - jump
   - corpse
   - coin
+  - saw
   layers:
   - Default
   - TransparentFX

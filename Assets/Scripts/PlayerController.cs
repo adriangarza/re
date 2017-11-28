@@ -183,6 +183,8 @@ public class PlayerController : MonoBehaviour {
 			cpAnim.SetBool("active", true);
 			RemoveCorpses();
 		}
+		//and then activate the checkpoint animation anyway
+		cpAnim.SetTrigger("activate");
 	}
 
 	void CollectCoin(GameObject coin) {
