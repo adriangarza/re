@@ -16,6 +16,11 @@ public class Parallax : MonoBehaviour {
     float prevX;
     float currX;
 
+    //leave undefined for none
+    public float ratioY = 0;
+    float prevY;
+    float currY;
+
     void Start () {
         player = GameObject.Find("Player");
 
@@ -25,18 +30,23 @@ public class Parallax : MonoBehaviour {
 
         currX = player.transform.position.x;
         prevX = player.transform.position.x;
+
+        currY = player.transform.position.y;
+        prevY = player.transform.position.y;
 	}
 	
 	void Update () {
         if (ratio != 0)
         {
-
             currX = player.transform.position.x;
-
             this.transform.Translate(new Vector2(ratio * (currX - prevX), 0));
-
             prevX = player.transform.position.x;
-
         }
+
+        if (ratioY != 0) {
+            currY = player.transform.position.y;
+            this.transform.Translate(new Vector2(0, ratioY * (currY - prevY)));
+            prevY = player.transform.position.y;
+        } 
 	}
 }
