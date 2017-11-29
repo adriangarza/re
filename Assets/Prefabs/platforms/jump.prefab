@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212293502223052454}
   - component: {fileID: 61191235409676874}
   - component: {fileID: 114742828888280654}
+  - component: {fileID: 95672622223027112}
   m_Layer: 0
   m_Name: jump
   m_TagString: jump
@@ -58,7 +59,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.25925925, y: 0.2777778}
+    oldSize: {x: 0.25925925, y: 0.537037}
     newSize: {x: 0.25925925, y: 0.055555556}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -67,6 +68,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.25369024, y: 0.13275993}
   m_EdgeRadius: 0
+--- !u!95 &95672622223027112
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1910787754979818}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ee6d963855f356a419bc5f1bc3bd6a6e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114742828888280654
 MonoBehaviour:
   m_ObjectHideFlags: 1
