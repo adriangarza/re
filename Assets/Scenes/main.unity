@@ -1446,6 +1446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ratio: -0.05
   snapToPlayer: 0
+  ratioY: -0.01
 --- !u!212 &598848066
 SpriteRenderer:
   m_ObjectHideFlags: 0
