@@ -1029,7 +1029,7 @@ Prefab:
         type: 2}
       propertyPath: respawnPoint
       value: 
-      objectReference: {fileID: 485625332}
+      objectReference: {fileID: 1876920397}
     - target: {fileID: 114102371071428368, guid: cf2eae560cb6402409c0621fc245f840,
         type: 2}
       propertyPath: graveyard
@@ -1153,7 +1153,7 @@ Prefab:
     - target: {fileID: 114742828888280654, guid: 856b9a18a6d710647b201c6d30ffe28c,
         type: 2}
       propertyPath: launchVector.y
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 856b9a18a6d710647b201c6d30ffe28c, type: 2}
@@ -1163,11 +1163,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4113544304452896, guid: 856b9a18a6d710647b201c6d30ffe28c,
     type: 2}
   m_PrefabInternal: {fileID: 445450248}
---- !u!1 &485625332 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1573726226237800, guid: a18d30bc7a57db74dae2da62a1a06f20,
-    type: 2}
-  m_PrefabInternal: {fileID: 132039495}
 --- !u!1 &489516521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,9 +1234,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654a1c906aefc744ca05396908027a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ratio: 0.95
+  ratio: 0.9
   snapToPlayer: 0
-  ratioY: 0.95
+  ratioY: 0.9
 --- !u!212 &530413876
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1437,7 +1432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ratio: -0.05
   snapToPlayer: 0
-  ratioY: -0.01
+  ratioY: -0.05
 --- !u!212 &598848066
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1891,9 +1886,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654a1c906aefc744ca05396908027a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ratio: 0.95
+  ratio: 0.9
   snapToPlayer: 0
-  ratioY: 0.95
+  ratioY: 0.9
 --- !u!212 &796501392
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4075,6 +4070,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1876920397 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1573726226237800, guid: a18d30bc7a57db74dae2da62a1a06f20,
+    type: 2}
+  m_PrefabInternal: {fileID: 132039495}
 --- !u!1001 &1897754104
 Prefab:
   m_ObjectHideFlags: 0
