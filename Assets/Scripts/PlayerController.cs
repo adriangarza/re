@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -26,7 +27,6 @@ public class PlayerController : MonoBehaviour {
 	public Transform corpse;
 
 	public int deaths = 0;
-	public int suicides = 0;
 
 	public GameObject graveyard;
 
@@ -36,16 +36,33 @@ public class PlayerController : MonoBehaviour {
 	//set to false after getting flung off a jump pad
 	public bool speedClamped = true;
 
+	//ui elements
+	public Text deathCount;
+	//e.g. "deaths: "
+	string deathText;
+
+	public Text coinsCount;
+	//and same for coins
+	string coinsText;
+
 	void Start () {
 		this.rb2d = GetComponent<Rigidbody2D>();
 		this.transform.position = new Vector3(respawnPoint.transform.position.x,
 										respawnPoint.transform.position.y,
 										this.transform.position.z);
+		deathText = deathCount.text;
+		coinsText = coinsCount.text;
+	}
+
+	void UpdateUI() {
+		deathCount.text = deathText + this.deaths;
+		coinsCount.text = coinsText + this.coins;
 	}
 	
 	void Update () {
 		Jump();
 		Move();
+		UpdateUI();
 	}
 
 	void Move() {
@@ -65,7 +82,7 @@ public class PlayerController : MonoBehaviour {
 		ClampSpeed();
 
 		if (Input.GetKeyDown(KeyCode.Z)) {
-			Die();
+			Suicide();
 		} 
 		if (Input.GetKeyDown(KeyCode.X)) {
 			RemoveCorpses();
@@ -179,8 +196,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Suicide() {
-		this.suicides++;
-		this.Die();
+		deaths += 9;
+		Die();
 	}
 
 	void ClampSpeed() {
