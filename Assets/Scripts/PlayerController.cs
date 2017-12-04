@@ -41,22 +41,16 @@ public class PlayerController : MonoBehaviour {
 	//e.g. "deaths: "
 	string deathText;
 
-	public Text coinsCount;
-	//and same for coins
-	string coinsText;
-
 	void Start () {
 		this.rb2d = GetComponent<Rigidbody2D>();
 		this.transform.position = new Vector3(respawnPoint.transform.position.x,
 										respawnPoint.transform.position.y,
 										this.transform.position.z);
 		deathText = deathCount.text;
-		coinsText = coinsCount.text;
 	}
 
 	void UpdateUI() {
 		deathCount.text = deathText + this.deaths;
-		coinsCount.text = coinsText + this.coins;
 	}
 	
 	void Update () {
@@ -179,19 +173,17 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void HitCheckpoint(GameObject cp) {
-		Animator cpAnim = cp.GetComponent<Animator>();
-		this.respawnPoint = cp;			
+		Animator cpAnim = cp.GetComponent<Animator>();		
 		//only play the animation, set respawn and remove corpses if the checkpoint hasn't been hit yet
 		if (!cpAnim.GetBool("active")) {
 			cpAnim.SetBool("active", true);
 			RemoveCorpses();
+			this.respawnPoint = cp;	
 		}
-		//and then activate the checkpoint animation anyway
-		cpAnim.SetTrigger("activate");
 	}
 
 	void CollectCoin(GameObject coin) {
-		this.coins++;
+		this.deaths--;
 		coin.GetComponent<Animator>().SetTrigger("get");
 	}
 
