@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour {
 	//e.g. "deaths: "
 	string deathText;
 
+	public CanvasGroup cg;
+	private bool flash = false;
+
 	void Start () {
 		this.rb2d = GetComponent<Rigidbody2D>();
 		this.transform.position = new Vector3(respawnPoint.transform.position.x,
@@ -51,11 +54,22 @@ public class PlayerController : MonoBehaviour {
 
 	void UpdateUI() {
 		deathCount.text = deathText + this.deaths;
+
+		//screen flashing white on death
+		if (flash) {
+			//make the flash fade quickly, but not instantly
+			cg.alpha -= Time.deltaTime * 5;
+			if (cg.alpha <= 0) {
+				flash = false;
+			}
+		}
 	}
 	
 	void Update () {
 		Jump();
 		Move();
+
+		//call UpdateUI at the end so it happens on the same frame as a gameworld update
 		UpdateUI();
 	}
 
@@ -135,6 +149,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void Die() {
+		//flash the screen white for a frame or two
+		FlashWhite();
+
 		deaths++;
 
 		//store the current rotation and position
@@ -211,5 +228,10 @@ public class PlayerController : MonoBehaviour {
 		} else if (angV < maxAngularVelocity * -1) {
 			this.rb2d.angularVelocity = maxAngularVelocity * -1;
 		}
+	}
+
+	void FlashWhite() {
+		cg.alpha = 1;
+		flash = true;
 	}
 }
