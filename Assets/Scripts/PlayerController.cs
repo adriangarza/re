@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour {
 
 	public CanvasGroup cg;
 	private bool flash = false;
+	private bool ended = false;
 
 	void Start () {
 		this.rb2d = GetComponent<Rigidbody2D>();
@@ -62,6 +63,10 @@ public class PlayerController : MonoBehaviour {
 			if (cg.alpha <= 0) {
 				flash = false;
 			}
+		}
+
+		if (ended) {
+			cg.alpha += Time.deltaTime * 2;
 		}
 	}
 	
@@ -190,6 +195,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void HitCheckpoint(GameObject cp) {
+		if (cp.name == "END") {
+			EndGame();
+		}
+
 		Animator cpAnim = cp.GetComponent<Animator>();		
 		//only play the animation, set respawn and remove corpses if the checkpoint hasn't been hit yet
 		if (!cpAnim.GetBool("active")) {
@@ -233,5 +242,10 @@ public class PlayerController : MonoBehaviour {
 	void FlashWhite() {
 		cg.alpha = 1;
 		flash = true;
+	}
+
+	void EndGame() {
+		rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
+		ended = true;
 	}
 }
