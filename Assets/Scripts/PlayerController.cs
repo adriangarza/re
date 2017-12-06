@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour {
 	private bool flash = false;
 	private bool ended = false;
 
+	int MAX_CORPSES = 100;
+
 	void Start () {
 		this.rb2d = GetComponent<Rigidbody2D>();
 		this.transform.position = new Vector3(respawnPoint.transform.position.x,
@@ -189,8 +191,15 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void RemoveCorpses() {
-		foreach (Transform corpse in graveyard.transform) {
-			corpse.gameObject.GetComponent<CorpseController>().Burst();
+		//don't destroy the physics engine if there are a ton of corpses
+		if (graveyard.transform.childCount > MAX_CORPSES) {
+			foreach (Transform corpse in graveyard.transform) {
+				Destroy(corpse.gameObject);
+			}
+		} else {
+			foreach (Transform corpse in graveyard.transform) {
+				corpse.gameObject.GetComponent<CorpseController>().Burst();
+			}
 		}
 	}
 
