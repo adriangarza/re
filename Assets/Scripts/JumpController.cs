@@ -8,6 +8,7 @@ public class JumpController : MonoBehaviour {
 	public Vector2 launchVector;
 
 	Animator anim;
+	float freezeTimeout = .1f;
 
 	void Start() {
 		anim = GetComponent<Animator>();
@@ -17,6 +18,10 @@ public class JumpController : MonoBehaviour {
 		if (other.gameObject.tag == "Player" || other.gameObject.tag == "corpse") {
 			other.gameObject.GetComponent<Rigidbody2D>().velocity = launchVector;
 			anim.SetTrigger("jump");
+		}
+
+		if (other.gameObject.tag == "Player") {
+			StartCoroutine(other.gameObject.GetComponent<PlayerController>().FreezeFor(freezeTimeout));
 		}
 	}
 }

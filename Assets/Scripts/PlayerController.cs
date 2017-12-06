@@ -248,4 +248,10 @@ public class PlayerController : MonoBehaviour {
 		rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
 		ended = true;
 	}
+
+	public IEnumerator FreezeFor(float seconds) {
+		frozen = true;
+		yield return new WaitForSeconds(seconds);
+		frozen = false;
+	}
 }
