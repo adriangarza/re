@@ -1,6 +1,6 @@
 For my final project, I made a game called `/re/`. It’s a simple 2D physics-based platformer where the artifacts of your previous runs persist between checkpoints. The objective is to get to the end of the single level, but every death leaves a corpse in the world. You’ll have to persist between lives to build off your past accomplishments to be able to finish the game. The scoring model is based off your past lives, so try to be as efficient as possible. 
 
-You can play it [here](http://adriangarza.github.io/re/), and be sure to check out the full source code [here](https://github.com/adriangarza/re/tree/master/Assets/Scripts). You can see the timeline of the game’s development through [these commit messages](https://github.com/adriangarza/re/commits/master).
+You can play it [here](http://adriangarza.github.io/re/) (use the arrow keys for movement), and be sure to check out the full source code [here](https://github.com/adriangarza/re/tree/master/Assets/Scripts). You can see the timeline of the game’s development through [these commit messages](https://github.com/adriangarza/re/commits/master).
 
 ## Programming
 One interesting problem I encountered during development was dealing with past lives - how exactly to treat death and keep track of the remaining player corpses in the level. If I left too many of them in the game it would slow everything down, but too few would make the game less interesting.
