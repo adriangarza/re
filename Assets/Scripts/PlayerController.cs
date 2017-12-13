@@ -94,14 +94,18 @@ public class PlayerController : MonoBehaviour {
             }
 		}
 
+		//since we're applying force instead of directly changing velocity
 		ClampSpeed();
 
+		//remove suicide ability for release
+		/* 
 		if (Input.GetKeyDown(KeyCode.Z)) {
 			Suicide();
 		} 
 		if (Input.GetKeyDown(KeyCode.X)) {
 			RemoveCorpses();
 		}
+		*/
 	}
 
 	void Jump() {
